@@ -10,10 +10,14 @@
             {% if update_task %}
 
             <input type="text" name="task" id="task" value="{{ update_task.content }}" class="form-control-sm">
+            <label for="deadline">Deadline:</label>
+            <input type="date" name="deadline" id="deadline" value="{{ update_task.deadline|default('') }}" class="form-control-sm">
             <input type="submit" value="Update task" class="btn btn-info">
             {% else %}
 
             <input type="text" name="task" id="task">
+            <label for="deadline">Deadline:</label>
+            <input type="date" name="deadline" id="deadline" class="form-control-sm">
             <input type="submit" value="Add task" class="btn btn-primary" class="form-control-sm">
             {% endif %}
 
@@ -33,7 +37,7 @@
 
                 <th scope="col">Task</th>
                 <th scope="col">Date</th>
-
+                <th scope="col">Deadline</th>
                 <th scope="col">Operation</th>
             </tr>
         </thead>
@@ -43,6 +47,7 @@
 
                 <td>{{ task.content }}</td>
                 <td>{{ task.pub_date.date() }}</td>
+                <td>{{ task.deadline.strftime('%Y-%m-%d') if task.deadline else 'N/A' }}</td>
                 <td>
 
                     {% if update_task %}
