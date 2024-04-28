@@ -3,10 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:my_pass@todo_app_db_container:3306/todo_db"
+#app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
-
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -64,4 +64,4 @@ def update(id):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
